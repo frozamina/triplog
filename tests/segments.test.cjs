@@ -9,7 +9,7 @@ const root=path.resolve(__dirname,'..'),url='file:///'+path.join(root,'app/src/m
  assert.equal(await page.locator('.trip[data-value="design-detail"] .trip-distance').innerText(),'480 km');
  await page.locator('.trip[data-value="design-detail"]').click();
  assert.equal(await page.locator('.metrics>div').count(),4);assert.equal(await page.locator('.metrics>div').last().innerText(),'480\n总里程 km');
- assert.deepEqual(await page.locator('.leg-distance').allTextContents(),['10 km','450 km','19 km','1 km']);
+ assert.deepEqual(await page.locator('.leg-distance').allTextContents(),['10 km','450 km','9 站','1 km']);
  await page.getByRole('button',{name:'编辑高铁',exact:true}).click();
  assert.equal(await page.locator('#extra-seat').count(),0);assert.equal(await page.getByRole('button',{name:/上移|下移/}).count(),0);
  assert.equal(await page.locator('#extra-mode').evaluate(e=>e.nextElementSibling.htmlFor),'extra-distance_km');
@@ -31,4 +31,5 @@ const root=path.resolve(__dirname,'..'),url='file:///'+path.join(root,'app/src/m
  assert.deepEqual(errors,[]);console.log('PASS: list/summary/leg mileage, note field ordering, retained old seat data, visible editor tags, touch segment deletion/cancel and saved sequence.');
  }finally{await browser.close()}
 })().catch(e=>{console.error(e);process.exitCode=1});
+
 

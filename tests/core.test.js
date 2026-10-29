@@ -1,6 +1,6 @@
 const assert=require('node:assert/strict');
 const C=require('../app/src/main/assets/core.js');
-function trip(){return {id:'test',origin:'湛江',destination:'深圳',date:'2026-10-24',status:'done',legs:[{id:'a',seq:0,mode:'highspeed',depart_at:'2026-10-24T23:00:00+08:00',arrive_at:'2026-10-25T01:00:00+08:00',cost:100.10,distance_km:200},{id:'b',seq:2,mode:'metro',depart_at:'2026-10-25T01:30:00+08:00',arrive_at:'2026-10-25T02:00:00+08:00',cost:0.20,distance_km:20}],transfers:[{id:'w',seq:1,start_at:'2026-10-25T01:00:00+08:00',end_at:'2026-10-25T01:30:00+08:00'}]}}
+function trip(){return {id:'test',origin:'湛江',destination:'深圳',date:'2026-10-24',status:'done',legs:[{id:'a',seq:0,mode:'highspeed',depart_at:'2026-10-24T23:00:00+08:00',arrive_at:'2026-10-25T01:00:00+08:00',cost:100.10,distance_km:200},{id:'b',seq:2,mode:'metro',depart_at:'2026-10-25T01:30:00+08:00',arrive_at:'2026-10-25T02:00:00+08:00',cost:0.20,distance_km:20,station_count:10}],transfers:[{id:'w',seq:1,start_at:'2026-10-25T01:00:00+08:00',end_at:'2026-10-25T01:30:00+08:00'}]}}
 let t=trip();C.validate(t);let m=C.metrics(t);assert.equal(m.total,180);assert.equal(m.travel,150);assert.equal(m.wait,30);assert.equal(m.cost,100.3);assert.equal(m.distance,220);assert.equal(m.transfers,1);assert.equal(m.ratio,1/6);
 t.legs[1].depart_at='2026-10-25T01:15:00+08:00';assert.throws(()=>C.validate(t),/重叠/);
 t=trip();t.legs[0].cost=-1;assert.throws(()=>C.validate(t),/金额/);
@@ -16,8 +16,13 @@ let estimateCopy=C.copyTrip(estimate,'2027-02-01');assert.equal(C.local(estimate
 t=trip();t.transfers=[];assert.equal(C.metrics(t).transfers,1,'highspeed to metro without a waiting record');
 t.legs[0].mode='metro';t.legs[1].mode='highspeed';assert.equal(C.metrics(t).transfers,1,'metro to highspeed');
 t=trip();t.transfers.push({...t.transfers[0],id:'another-wait',seq:1.5});assert.equal(C.metrics(t).transfers,1,'multiple waits do not double-count the same handoff');
-t=trip();t.legs.push({...t.legs[1],id:'walk',seq:3,mode:'walk'});assert.equal(C.metrics(t).transfers,2);
+t=trip();t.legs.push({...t.legs[1],id:'walk',seq:3,mode:'walk'});assert.equal(C.metrics(t).transfers,1,'vehicle to walking is not another transfer');
+t=trip();t.legs[0].mode='taxi';t.legs[1].mode='taxi';assert.equal(C.metrics(t).transfers,0,'same vehicle mode does not add a transfer');
+t=trip();t.legs[0].mode='taxi';assert.equal(C.metrics(t).transfers,1,'a change from taxi to metro counts');
+t=trip();t.legs[0].mode='metro';t.legs[1].mode='highspeed';assert.equal(C.metrics(t).transfers,1,'metro to highspeed counts');
+t=trip();t.legs[1].station_count=12;assert.equal(C.metrics(t).distance,224,'metro station mileage uses 2 km per station, not its old distance field');
 t=trip();t.legs=t.legs.slice(0,1);assert.equal(C.metrics(t).transfers,0,'waiting after the last leg is not another vehicle handoff');
 t=trip();t.distance_km=0;assert.equal(C.metrics(t).distance,0);assert.equal(C.metrics(t).distanceKnown,true);
 t=trip();t.legs.forEach(s=>s.distance_km=null);assert.equal(C.metrics(t).distanceKnown,false);
-console.log('PASS: adjacent-leg transfer counts, deduplicated waits, zero and missing mileage.');
+console.log('PASS: vehicle-mode transfer counts, walking exclusion, deduplicated waits, metro station mileage, zero and missing mileage.');
+

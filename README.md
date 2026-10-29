@@ -1,8 +1,17 @@
-# 途迹 TripLog 1.1.3
+# 途迹 TripLog 1.1.4
 
 按 [PRD](docs/PRD.md) 与 [UI 设计稿](docs/ui-design.html) 重做的离线 Android 出行手账。
 
-[下载新版 APK](https://github.com/frozamina/triplog/raw/refs/heads/main/releases/TripLog-1.1.3.apk)
+[下载新版 APK](https://github.com/frozamina/triplog/raw/refs/heads/main/releases/TripLog-1.1.4.apk)
+
+## 1.1.4 里程与换乘规则
+
+- 首页里程字号与时间、花费统一并改用青绿色；详情概览及每段通行的时间、花费、里程字号同步放大。
+- 编辑行程页放大路线、时间、交通方式、标签、里程和表单字号。
+- 地铁段录入乘坐站数，按每站 2 km 计入总里程；详情和编辑页显示站数，CSV 同时导出站数与折算里程。
+- 换乘只统计交通工具之间的方式变化；步行段不计，跨过步行后交通工具之间方式变化仍计 1 次。
+
+地铁站数作为新字段保存在原有行程 JSON 中；不修改数据库表、不清空已有记录。地铁段旧的里程字段不再参与计算，原始值仍留在记录中。
 
 ## 1.1.3 行程衔接与分段编辑
 
@@ -60,7 +69,7 @@ PRD 中列为远期的 P2（OCR、年度报告、同行分摊）不属于本版�
 
 ## 覆盖升级与数据
 
-本版 `versionCode=5`、`versionName=1.1.3`，与 1.0.0 / 1.1.0 / 1.1.1 / 1.1.2 使用同一永久签名和包名 `com.frozamina.triplog`。数据库继续为 `triplog.db`，schema 2，`Store.java` 与上版相同，无删表、重建或初始化示例数据。
+本版 `versionCode=6`、`versionName=1.1.4`，与 1.0.0 / 1.1.0 / 1.1.1 / 1.1.2 / 1.1.3 使用同一永久签名和包名 `com.frozamina.triplog`。数据库继续为 `triplog.db`，schema 2，`Store.java` 与上版相同，无删表、重建或初始化示例数据。
 
 **直接安装新版 APK，选择更新。不要先卸载，也不要清除应用数据。** 建议升级前从“我的”导出 JSON 备份。手机损坏、重置、卸载、清数据或签名密钥丢失，不能通过 APK 更新机制兜底。
 
@@ -112,3 +121,4 @@ APK 经 aapt2 / D8 构建、zipalign 对齐、apksigner v2/v3 验签，并核对
 - 金额按整数分聚合；等待与通行独立统计；没有里程时显示缺失指标，时间空隙不伪装成通行。
 - 记录包含时间戳及录入时区偏移，展示按设备本地时间。
 - 本地 WebView 只加载 APK 内资源，应用没有网络和定位权限。备份包含出行地点与时间，请妥善保管。
+

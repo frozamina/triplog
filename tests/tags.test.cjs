@@ -50,3 +50,4 @@ const root=path.resolve(__dirname,'..'),url='file:///'+path.join(root,'app/src/m
   assert.deepEqual(errors,[]);console.log('PASS: shared management/picker catalog; tag row below mode; multi-select/deselect; custom labels; other fields preserved; leg/trip/transfer persistence and detail display; counts.');
  }finally{await browser.close()}
 })().catch(e=>{console.error(e);process.exitCode=1});
+

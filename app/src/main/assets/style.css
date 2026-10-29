@@ -49,3 +49,25 @@ html,body,#app{height:100%;width:100%;overflow:hidden;min-height:0}body{backgrou
 .sort-controls{display:flex;justify-content:flex-end}.sort-controls button{width:100%;min-height:48px}
 .legcard,.tcard{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}.legcard input,.legcard textarea{-webkit-user-select:text;user-select:text;-webkit-touch-callout:default}
 @media(max-width:360px){.metrics-four b{font-size:15px}.metrics-four span{font-size:8.5px}.leg-readings{gap:3px 5px}.lhead .leg-readings .dur,.leg-readings .price{font-size:11px}.trip-meta .trip-distance{font-size:9px}}
+/* Mileage now shares the visual weight of time and fare, using the app's teal accent. */
+.trip-meta .cost{font-size:14px}.trip-meta .trip-distance{font-family:var(--font-num);font-size:14px;font-weight:500;color:#3F7D6B;line-height:1.05}
+.metrics-four b{font-size:19px}.metrics-four span{font-size:10px}
+.leg-readings{gap:5px 9px}.lhead .leg-readings .dur,.leg-readings .price,.leg-readings .leg-distance{font-size:14px}
+.leg-readings .leg-distance{font-weight:500;color:#3F7D6B;line-height:1.1}
+.editor-leg-distance{font-size:14px;font-weight:500;color:#3F7D6B;line-height:1.35}
+.segment-tags>span{font-size:11px;padding:4px 8px}
+.editor-segment-meta{align-items:center;margin-top:10px}
+.sec-label{font-size:12px;letter-spacing:.08em}
+.legroute{font-size:16px;gap:8px}.legroute .text-input{font-size:16px;min-height:28px}
+.timerow .time-control{font-size:14px;min-height:36px;padding:7px 10px}
+.durpill{font-size:14px}.mode-chips .mchip{font-size:12px;min-height:32px;padding:6px 10px}
+.legcard{padding:14px 15px}.leghead{margin-bottom:12px}.legfoot{margin-top:12px;padding-top:11px}
+.legfoot input.costbox{font-size:15px;width:76px;height:28px;min-height:28px}
+.legfoot .cost-unit{font-size:15px}.legfoot .noteadd{font-size:13px;min-height:34px;height:auto}
+.walk-free,.legfoot .lsub{font-size:12px}.editor-segment-meta .segment-tags{gap:6px}
+.field .text-input,.field-val.text-input{font-size:16px;min-height:30px}.field{min-height:50px;height:50px}
+.sheet .form-detail label{font-size:13px;margin:11px 0 6px}
+.sheet .form-detail input,.sheet .form-detail textarea,.sheet .form-detail select{font-size:15px;min-height:48px;padding:11px}
+.sheet .two-fields input{font-size:13px}
+@media(max-width:360px){.metrics-four b{font-size:17px}.metrics-four span{font-size:9px}.leg-readings{gap:4px 6px}.lhead .leg-readings .dur,.leg-readings .price,.leg-readings .leg-distance{font-size:12px}.trip-meta .trip-distance{font-size:13px}.mode-chips .mchip{font-size:11px;padding:5px 8px}.legroute,.legroute .text-input{font-size:15px}.timerow .time-control,.durpill{font-size:13px}}
+

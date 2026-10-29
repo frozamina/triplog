@@ -52,3 +52,4 @@ const root=path.resolve(__dirname,'..'),url='file:///'+path.join(root,'app/src/m
   assert.deepEqual(errors,[]);console.log('PASS: grouped amount focus; larger segment controls; free walking and fare restoration; short tap; mouse/touch long press; cancel/delete; scroll cancellation; persistent list deletion.');
  } finally {await browser.close()}
 })().catch(e=>{console.error(e);process.exitCode=1});
+

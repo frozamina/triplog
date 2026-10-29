@@ -50,6 +50,7 @@
           "cost": 5,
           "tags": [],
           "carrier": "4 号线",
+          "station_count": 9,
           "distance_km": 19
         },
         {
