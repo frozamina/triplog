@@ -1,8 +1,17 @@
-# 途迹 TripLog 1.1.1
+# 途迹 TripLog 1.1.2
 
 按 [PRD](docs/PRD.md) 与 [UI 设计稿](docs/ui-design.html) 重做的离线 Android 出行手账。
 
-[下载新版 APK](https://github.com/frozamina/triplog/raw/refs/heads/main/releases/TripLog-1.1.1.apk)
+[下载新版 APK](https://github.com/frozamina/triplog/raw/refs/heads/main/releases/TripLog-1.1.2.apk)
+
+## 1.1.2 标签选择
+
+- 标签输入改为可展开的多选列表，与“标签管理”共用预置和已用标签，支持多选、取消及自定义标签。
+- 本段补充信息中的标签行位于交通方式正下方，选择标签不会清空其他已填字段。
+- 整趟与换乘使用同样的选择器；详情页顶部标签可直接点击编辑。
+- 保存的通行段、换乘段标签会直接显示在详情时间轴上，并计入标签管理频次。
+
+![标签多选](docs/screenshots/tag-picker.png)
 
 ## 1.1.1 修复
 
@@ -41,7 +50,7 @@ PRD 中列为远期的 P2（OCR、年度报告、同行分摊）不属于本版�
 
 ## 覆盖升级与数据
 
-本版 `versionCode=3`、`versionName=1.1.1`，与 1.0.0 / 1.1.0 使用同一永久签名和包名 `com.frozamina.triplog`。数据库继续为 `triplog.db`，schema 2，`Store.java` 与上版相同，无删表、重建或初始化示例数据。
+本版 `versionCode=4`、`versionName=1.1.2`，与 1.0.0 / 1.1.0 / 1.1.1 使用同一永久签名和包名 `com.frozamina.triplog`。数据库继续为 `triplog.db`，schema 2，`Store.java` 与上版相同，无删表、重建或初始化示例数据。
 
 **直接安装新版 APK，选择更新。不要先卸载，也不要清除应用数据。** 建议升级前从“我的”导出 JSON 备份。手机损坏、重置、卸载、清数据或签名密钥丢失，不能通过 APK 更新机制兜底。
 
@@ -60,8 +69,8 @@ export ANDROID_HOME=/path/to/android-sdk
 export TRIPLOG_KEYSTORE=/secure/path/triplog-release.jks
 export TRIPLOG_STORE_PASSWORD='your-store-password'
 export TRIPLOG_KEY_PASSWORD='your-key-password'
-export TRIPLOG_VERSION_CODE=4
-export TRIPLOG_VERSION_NAME=1.1.2
+export TRIPLOG_VERSION_CODE=5
+export TRIPLOG_VERSION_NAME=1.1.3
 python scripts/build.py
 ```
 
@@ -78,6 +87,7 @@ npm install --no-save playwright@1.62.1
 npx playwright install chromium
 node tests/ui.test.cjs
 node tests/editor-gestures.test.cjs
+node tests/tags.test.cjs
 ```
 
 已通过核心计算测试，以及 320/360/390/480 宽度下七个页面的检查。流程测试覆盖新建、分段、等待、保存、模板、计时卡、切换类型、页面重载恢复、接续、结束、超过 6 小时的处理、进行中编辑、标签管理及旧记录未知字段保留。测试夹具仅位于 `tests/fixtures/`。
