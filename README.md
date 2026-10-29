@@ -1,10 +1,19 @@
-# 途迹 TripLog 1.1.0
+# 途迹 TripLog 1.1.1
 
 按 [PRD](docs/PRD.md) 与 [UI 设计稿](docs/ui-design.html) 重做的离线 Android 出行手账。
 
-[下载新版 APK](https://github.com/frozamina/triplog/raw/refs/heads/main/releases/TripLog-1.1.0.apk)
+[下载新版 APK](https://github.com/frozamina/triplog/raw/refs/heads/main/releases/TripLog-1.1.1.apk)
 
-## 本次重做
+## 1.1.1 修复
+
+- 费用符号和输入框整体高亮，输入金额时不再被矩形焦点框压住。
+- 上移、下移、删除改为三个 48px 高的显眼按钮，删除单独使用赤陶色。
+- 步行显示“步行 · 免费”，不显示待补车费，也不计入缺失花费提醒；从收费方式临时切换再切回时保留已输入的金额。
+- 首页普通行程和进行中行程均支持长按约 0.55 秒弹出删除菜单，无需进入详情；滑动取消长按，短按仍打开行程，删除前确认。
+
+![操作按钮](docs/screenshots/segment-actions.png)
+
+## 界面
 
 直接复用设计稿的完整 CSS（`design-original.css`），按六个页面的结构实现动态界面。墨绿月度概览、进行中置顶卡、彩点方式链、白色实时计时卡、纵向轨道时间轴、段落编辑卡、四格 KPI、花费分布表、方式效率表和方案对比表均保留。Fraunces、Noto Sans SC、Noto Serif SC 随 APK 离线打包，许可随字体提供。
 
@@ -32,7 +41,7 @@ PRD 中列为远期的 P2（OCR、年度报告、同行分摊）不属于本版�
 
 ## 覆盖升级与数据
 
-本版 `versionCode=2`、`versionName=1.1.0`，与 1.0.0 使用同一永久签名和包名 `com.frozamina.triplog`。数据库继续为 `triplog.db`，schema 2，`Store.java` 与上版相同，无删表、重建或初始化示例数据。
+本版 `versionCode=3`、`versionName=1.1.1`，与 1.0.0 / 1.1.0 使用同一永久签名和包名 `com.frozamina.triplog`。数据库继续为 `triplog.db`，schema 2，`Store.java` 与上版相同，无删表、重建或初始化示例数据。
 
 **直接安装新版 APK，选择更新。不要先卸载，也不要清除应用数据。** 建议升级前从“我的”导出 JSON 备份。手机损坏、重置、卸载、清数据或签名密钥丢失，不能通过 APK 更新机制兜底。
 
@@ -51,8 +60,8 @@ export ANDROID_HOME=/path/to/android-sdk
 export TRIPLOG_KEYSTORE=/secure/path/triplog-release.jks
 export TRIPLOG_STORE_PASSWORD='your-store-password'
 export TRIPLOG_KEY_PASSWORD='your-key-password'
-export TRIPLOG_VERSION_CODE=3
-export TRIPLOG_VERSION_NAME=1.1.1
+export TRIPLOG_VERSION_CODE=4
+export TRIPLOG_VERSION_NAME=1.1.2
 python scripts/build.py
 ```
 
@@ -68,6 +77,7 @@ node tests/core.test.js
 npm install --no-save playwright@1.62.1
 npx playwright install chromium
 node tests/ui.test.cjs
+node tests/editor-gestures.test.cjs
 ```
 
 已通过核心计算测试，以及 320/360/390/480 宽度下七个页面的检查。流程测试覆盖新建、分段、等待、保存、模板、计时卡、切换类型、页面重载恢复、接续、结束、超过 6 小时的处理、进行中编辑、标签管理及旧记录未知字段保留。测试夹具仅位于 `tests/fixtures/`。
