@@ -2,6 +2,8 @@
 
 基于提供的 PRD 与界面设计实现的离线 Android 出行手账。Android 8.0（API 26）及以上；应用包名固定为 `com.frozamina.triplog`。
 
+[下载 APK 1.0.0](https://github.com/frozamina/triplog/raw/refs/heads/main/releases/TripLog-1.0.0.apk)
+
 ## 已实现
 
 - 创建、编辑、草稿、删除行程，按月分组和搜索。
@@ -67,4 +69,3 @@ node tests/core.test.js
 - 数据仍含个人位置与时间，请将 JSON/CSV 备份当作个人文件保管。
 
 产品参考资料见 `docs/PRD.md` 和 `docs/ui-design.html`。
-
