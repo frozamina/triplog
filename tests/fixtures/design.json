@@ -1,0 +1,341 @@
+{
+  "format": "triplog",
+  "schemaVersion": 2,
+  "trips": [
+    {
+      "id": "design-detail",
+      "origin": "湛江",
+      "destination": "深圳",
+      "date": "2026-10-24",
+      "legs": [
+        {
+          "id": "taxi",
+          "seq": 0,
+          "mode": "taxi",
+          "from_name": "家",
+          "to_name": "湛江西站",
+          "depart_at": "2026-10-24T06:12:00+08:00",
+          "arrive_at": "2026-10-24T06:30:00+08:00",
+          "cost": 26,
+          "tags": [],
+          "from_detail": "赤坎区",
+          "to_detail": "落客区",
+          "distance_km": 10
+        },
+        {
+          "id": "rail",
+          "seq": 2,
+          "mode": "highspeed",
+          "from_name": "湛江西站",
+          "to_name": "深圳北站",
+          "depart_at": "2026-10-24T07:12:00+08:00",
+          "arrive_at": "2026-10-24T10:40:00+08:00",
+          "cost": 323,
+          "tags": [
+            "晚点"
+          ],
+          "carrier": "G1234",
+          "seat": "05车 12A",
+          "note": "晚点 8 分钟发车，车上补了觉",
+          "distance_km": 450
+        },
+        {
+          "id": "metro",
+          "seq": 4,
+          "mode": "metro",
+          "from_name": "深圳北站",
+          "to_name": "市民中心站",
+          "depart_at": "2026-10-24T11:04:00+08:00",
+          "arrive_at": "2026-10-24T11:30:00+08:00",
+          "cost": 5,
+          "tags": [],
+          "carrier": "4 号线",
+          "distance_km": 19
+        },
+        {
+          "id": "walk",
+          "seq": 6,
+          "mode": "walk",
+          "from_name": "市民中心站 C 口",
+          "to_name": "公司",
+          "depart_at": "2026-10-24T11:36:00+08:00",
+          "arrive_at": "2026-10-24T11:48:00+08:00",
+          "cost": 0,
+          "tags": [],
+          "to_detail": "3F",
+          "distance_km": 1
+        }
+      ],
+      "transfers": [
+        {
+          "id": "wait1",
+          "seq": 1,
+          "location": "站前广场",
+          "start_at": "2026-10-24T06:30:00+08:00",
+          "end_at": "2026-10-24T07:12:00+08:00",
+          "activity": "wait",
+          "note": "便利店买了早饭",
+          "tags": []
+        },
+        {
+          "id": "wait2",
+          "seq": 3,
+          "location": "站内换乘通道",
+          "start_at": "2026-10-24T10:40:00+08:00",
+          "end_at": "2026-10-24T11:04:00+08:00",
+          "activity": "wait",
+          "note": "走了 8 分钟",
+          "tags": []
+        },
+        {
+          "id": "wait3",
+          "seq": 5,
+          "location": "出站步行",
+          "start_at": "2026-10-24T11:30:00+08:00",
+          "end_at": "2026-10-24T11:36:00+08:00",
+          "activity": "wait",
+          "note": "",
+          "tags": []
+        }
+      ],
+      "distance_km": 480,
+      "status": "done",
+      "tags": [
+        "回家",
+        "独行"
+      ],
+      "created_at": "2026-10-24T00:00:00+08:00",
+      "updated_at": "2026-10-24T12:00:00+08:00"
+    },
+    {
+      "id": "reverse",
+      "origin": "深圳",
+      "destination": "湛江",
+      "date": "2026-10-18",
+      "legs": [
+        {
+          "id": "reverseleg",
+          "seq": 0,
+          "mode": "highspeed",
+          "depart_at": "2026-10-18T08:00:00+08:00",
+          "arrive_at": "2026-10-18T03:32:00.000Z",
+          "cost": 349,
+          "distance_km": 720,
+          "from_name": "深圳",
+          "to_name": "湛江",
+          "tags": []
+        }
+      ],
+      "transfers": [
+        {
+          "id": "reversew",
+          "seq": 1,
+          "start_at": "2026-10-18T03:32:00.000Z",
+          "end_at": "2026-10-18T04:52:00.000Z",
+          "location": "湛江",
+          "activity": "wait",
+          "tags": []
+        }
+      ],
+      "distance_km": 720,
+      "status": "done",
+      "tags": [],
+      "created_at": "2026-10-18T00:00:00+08:00",
+      "updated_at": "2026-10-18T12:00:00+08:00"
+    },
+    {
+      "id": "coach",
+      "origin": "湛江",
+      "destination": "茂名",
+      "date": "2026-10-09",
+      "legs": [
+        {
+          "id": "coachleg",
+          "seq": 0,
+          "mode": "coach",
+          "depart_at": "2026-10-09T08:00:00+08:00",
+          "arrive_at": "2026-10-09T02:45:00.000Z",
+          "cost": 68,
+          "distance_km": 310,
+          "from_name": "湛江",
+          "to_name": "茂名",
+          "tags": []
+        }
+      ],
+      "transfers": [
+        {
+          "id": "coachw",
+          "seq": 1,
+          "start_at": "2026-10-09T02:45:00.000Z",
+          "end_at": "2026-10-09T03:05:00.000Z",
+          "location": "茂名",
+          "activity": "wait",
+          "tags": []
+        }
+      ],
+      "distance_km": 310,
+      "status": "done",
+      "tags": [],
+      "created_at": "2026-10-09T00:00:00+08:00",
+      "updated_at": "2026-10-09T12:00:00+08:00"
+    },
+    {
+      "id": "other",
+      "origin": "湛江",
+      "destination": "北京",
+      "date": "2026-10-01",
+      "legs": [
+        {
+          "id": "otherleg",
+          "seq": 0,
+          "mode": "highspeed",
+          "depart_at": "2026-10-01T08:00:00+08:00",
+          "arrive_at": "2026-10-01T08:09:00.000Z",
+          "cost": 475,
+          "distance_km": 1350,
+          "from_name": "湛江",
+          "to_name": "北京",
+          "tags": []
+        }
+      ],
+      "transfers": [
+        {
+          "id": "otherw",
+          "seq": 1,
+          "start_at": "2026-10-01T08:09:00.000Z",
+          "end_at": "2026-10-01T10:37:00.000Z",
+          "location": "北京",
+          "activity": "wait",
+          "tags": []
+        }
+      ],
+      "distance_km": 1350,
+      "status": "done",
+      "tags": [],
+      "created_at": "2026-10-01T00:00:00+08:00",
+      "updated_at": "2026-10-01T12:00:00+08:00"
+    },
+    {
+      "id": "design-live",
+      "origin": "湛江",
+      "destination": "广州",
+      "date": "2026-10-29",
+      "legs": [
+        {
+          "id": "ltaxi",
+          "seq": 0,
+          "mode": "taxi",
+          "from_name": "赤坎区家中",
+          "to_name": "湛江西站",
+          "depart_at": "2026-10-29T14:20:00+08:00",
+          "arrive_at": "2026-10-29T14:38:00+08:00",
+          "cost": 26,
+          "tags": []
+        },
+        {
+          "id": "lrail",
+          "seq": 2,
+          "mode": "highspeed",
+          "carrier": "G6128",
+          "from_name": "湛江西站",
+          "to_name": "广州南",
+          "depart_at": "2026-10-29T15:20:00+08:00",
+          "arrive_at": null,
+          "cost": 323,
+          "tags": []
+        }
+      ],
+      "transfers": [
+        {
+          "id": "lwait",
+          "seq": 1,
+          "location": "站前广场",
+          "activity": "wait",
+          "start_at": "2026-10-29T14:38:00+08:00",
+          "end_at": "2026-10-29T15:20:00+08:00",
+          "note": "便利店买了早饭",
+          "tags": []
+        }
+      ],
+      "distance_km": 0,
+      "status": "ongoing",
+      "tags": [],
+      "created_at": "2026-10-29T00:00:00+08:00",
+      "updated_at": "2026-10-29T12:00:00+08:00",
+      "expected_arrival": "2026-10-29T18:48:00+08:00"
+    },
+    {
+      "id": "cmp-coach",
+      "origin": "湛江",
+      "destination": "深圳",
+      "date": "2026-09-10",
+      "legs": [
+        {
+          "id": "cmp-coachleg",
+          "seq": 0,
+          "mode": "coach",
+          "depart_at": "2026-09-10T08:00:00+08:00",
+          "arrive_at": "2026-09-10T08:30:00.000Z",
+          "cost": 180,
+          "distance_km": 480,
+          "from_name": "湛江",
+          "to_name": "深圳",
+          "tags": []
+        }
+      ],
+      "transfers": [
+        {
+          "id": "cmp-coachw",
+          "seq": 1,
+          "start_at": "2026-09-10T08:30:00.000Z",
+          "end_at": "2026-09-10T08:50:00.000Z",
+          "location": "深圳",
+          "activity": "wait",
+          "tags": []
+        }
+      ],
+      "distance_km": 480,
+      "status": "done",
+      "tags": [],
+      "created_at": "2026-09-10T00:00:00+08:00",
+      "updated_at": "2026-09-10T12:00:00+08:00"
+    },
+    {
+      "id": "cmp-drive",
+      "origin": "湛江",
+      "destination": "深圳",
+      "date": "2026-09-12",
+      "legs": [
+        {
+          "id": "cmp-driveleg",
+          "seq": 0,
+          "mode": "drive",
+          "depart_at": "2026-09-12T08:00:00+08:00",
+          "arrive_at": "2026-09-12T06:40:00.000Z",
+          "cost": 612,
+          "distance_km": 480,
+          "from_name": "湛江",
+          "to_name": "深圳",
+          "tags": []
+        }
+      ],
+      "transfers": [
+        {
+          "id": "cmp-drivew",
+          "seq": 1,
+          "start_at": "2026-09-12T06:40:00.000Z",
+          "end_at": "2026-09-12T07:10:00.000Z",
+          "location": "深圳",
+          "activity": "wait",
+          "tags": []
+        }
+      ],
+      "distance_km": 480,
+      "status": "done",
+      "tags": [],
+      "created_at": "2026-09-12T00:00:00+08:00",
+      "updated_at": "2026-09-12T12:00:00+08:00"
+    }
+  ],
+  "templates": []
+}

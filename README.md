@@ -1,38 +1,49 @@
-# 途迹 TripLog
+# 途迹 TripLog 1.1.0
 
-基于提供的 PRD 与界面设计实现的离线 Android 出行手账。Android 8.0（API 26）及以上；应用包名固定为 `com.frozamina.triplog`。
+按 [PRD](docs/PRD.md) 与 [UI 设计稿](docs/ui-design.html) 重做的离线 Android 出行手账。
 
-[下载 APK 1.0.0](https://github.com/frozamina/triplog/raw/refs/heads/main/releases/TripLog-1.0.0.apk)
+[下载新版 APK](https://github.com/frozamina/triplog/raw/refs/heads/main/releases/TripLog-1.1.0.apk)
 
-## 已实现
+## 本次重做
 
-- 创建、编辑、草稿、删除行程，按月分组和搜索。
-- 独立的通行段、换乘等待；完整日期时间，跨天、重叠校验；拖动和上下按钮排序。
-- 交通方式、起终点、时间、花费、里程、班次、座位、备注和标签。
-- 时间轴、门到门总耗时、通行/等待时长与占比、总花费、有效时速、每公里成本。
-- 月度统计、方式效率、同 OD 历史方案均值比较与最快/最省/最省心标记。
-- 模板复用、实时打卡、类型切换保留开始时间、重开后恢复计时。
-- 系统文件选择器导出 JSON 备份、合并恢复、分段 CSV 和 PNG 行程卡片。
-- 原生 SQLite 持久化与事务；更新/删除前保留旧版本，导入失败整批回滚。
+直接复用设计稿的完整 CSS（`design-original.css`），按六个页面的结构实现动态界面。墨绿月度概览、进行中置顶卡、彩点方式链、白色实时计时卡、纵向轨道时间轴、段落编辑卡、四格 KPI、花费分布表、方式效率表和方案对比表均保留。Fraunces、Noto Sans SC、Noto Serif SC 随 APK 离线打包，许可随字体提供。
 
-界面为随 APK 打包的离线 HTML/CSS/JavaScript，Android 原生 Java 桥接 SQLite 和文件选择器。应用没有网络、定位和广泛文件读写权限。中文和数字采用本机字体回退，保证完全离线；不依赖外部字体服务。
+Android 使用系统状态栏和系统导航，不绘制设计展示用的 iPhone 外框、刘海和底部横条。底部采用设计稿的“行程 / 洞察 / 我的”三个 Tab，新建记录从加号进入。可编辑字段使用真实输入控件，其他信息收进补充面板。
 
-## 安装与后续升级
+页面中的数字从本机记录计算，首次安装没有虚构行程。截图使用独立测试数据，未打包进 APK。
 
-1. 在安卓手机打开签名 APK 安装。系统可能要求允许该文件来源安装应用。
-2. 后续直接打开新版 APK，选择更新。**不要先卸载，也不要清除应用数据。**
-3. 始终沿用相同包名、相同签名证书，并递增 `versionCode`。
-4. 数据库文件名固定 `triplog.db`，当前 schema 2；任何未来 schema 变动都必须在 `Store.onUpgrade` 增量迁移并验证旧数据。
-5. “我的 → 导出 JSON 备份”可制作独立备份。手机损坏、重置、卸载或人为清数据无法靠 APK 更新机制避免，需通过备份恢复。
+![实时打卡](docs/screenshots/live.png)
 
-永久签名证书 SHA-256：
+[列表](docs/screenshots/home.png) · [详情](docs/screenshots/detail.png) · [编辑](docs/screenshots/editor.png) · [洞察](docs/screenshots/insights.png) · [对比](docs/screenshots/compare.png) · [我的](docs/screenshots/mine.png)
+
+## 功能
+
+- 按月分组的行程列表、搜索、进行中置顶和超过 24 小时待补全提示。
+- 城市、地点详情、日期、标题、备注、标签；草稿、完成、复制与删除。
+- 独立的通行段和换乘等待；时间接续、自动补齐相邻通行段之间的等待、跨天和重叠校验、拖动与上下排序。
+- 11 种交通方式，班次、座位、起终点详情、里程、花费明细、备注及标签。
+- 实时打卡计时卡、六个常用类型选项和更多方式、类型切换不重置开始时间、结束后立即开始下一段、预计到达。
+- 超过 6 小时可按预计时间结束、继续计时或手动改时间，绝不自动结束。打卡结束提示待补花费。
+- 时间轴、通行/等待构成、费用与里程指标；月度统计、方式效率、标签频次与条件洞察。
+- 路线模板复用，同 OD 历史组合对比，最快/最省/最省心标记与省时成本。
+- 标签重命名和移除，JSON 备份与合并恢复、CSV 明细和 PNG 分享卡片。
+
+PRD 中列为远期的 P2（OCR、年度报告、同行分摊）不属于本版。
+
+## 覆盖升级与数据
+
+本版 `versionCode=2`、`versionName=1.1.0`，与 1.0.0 使用同一永久签名和包名 `com.frozamina.triplog`。数据库继续为 `triplog.db`，schema 2，`Store.java` 与上版相同，无删表、重建或初始化示例数据。
+
+**直接安装新版 APK，选择更新。不要先卸载，也不要清除应用数据。** 建议升级前从“我的”导出 JSON 备份。手机损坏、重置、卸载、清数据或签名密钥丢失，不能通过 APK 更新机制兜底。
+
+签名证书 SHA-256：
 `a305517baa390cdbb8aa878cd269486bb073af8c93ce76539454e409f1d12b31`
 
-**签名 JKS 和密码不在本仓库。** 请保存单独交付的签名备份包，不能丢失，也不能公开上传。更换密钥会导致现有安装无法直接覆盖升级。
+签名私钥和密码单独交付，未上传本仓库。后续每版必须沿用同一密钥并递增 versionCode；GitHub Actions 没有配置密钥 Secrets 时不会生成替代签名。
 
 ## 构建
 
-推荐 JDK 17+、Python 3、Android SDK platform 35 / build-tools 35.0.0。
+需要 JDK 17+、Python 3、Android SDK platform 35 / build-tools 35.0.0。
 
 ```sh
 export JAVA_HOME=/path/to/jdk
@@ -40,32 +51,33 @@ export ANDROID_HOME=/path/to/android-sdk
 export TRIPLOG_KEYSTORE=/secure/path/triplog-release.jks
 export TRIPLOG_STORE_PASSWORD='your-store-password'
 export TRIPLOG_KEY_PASSWORD='your-key-password'
-export TRIPLOG_VERSION_CODE=2
-export TRIPLOG_VERSION_NAME=1.0.1
+export TRIPLOG_VERSION_CODE=3
+export TRIPLOG_VERSION_NAME=1.1.1
 python scripts/build.py
 ```
 
-Windows 使用 PowerShell `$env:变量名='值'` 设置同名环境变量。SDK 直接构建脚本无需第三方运行时依赖，产物在项目上一级目录；同时保留标准 Gradle 工程供 Android Studio 导入。
+Windows 使用 PowerShell `$env:变量名='值'`。直接 SDK 构建不需要 npm 或 Gradle 运行依赖，产物在项目上一级；也可以用 Android Studio 导入 Gradle 工程。
 
-GitHub Actions 手动构建工作流需由仓库管理员配置三个 Secrets：`TRIPLOG_KEYSTORE_BASE64`、`TRIPLOG_STORE_PASSWORD`、`TRIPLOG_KEY_PASSWORD`。前者为现有 JKS 的 Base64 内容。工作流不会自动生成新密钥，避免后续覆盖安装签名变化。
+GitHub Actions 手动构建需管理员配置 `TRIPLOG_KEYSTORE_BASE64`、`TRIPLOG_STORE_PASSWORD`、`TRIPLOG_KEY_PASSWORD` 三项 Secrets。第一项为已交付 JKS 的 Base64，不是新生成的密钥。
 
 ## 验证
 
 ```sh
 node tests/core.test.js
+# 下面仅用于界面测试，不是 APK 依赖
+npm install --no-save playwright@1.62.1
+npx playwright install chromium
+node tests/ui.test.cjs
 ```
 
-已验证核心时间/金额计算、跨天、重叠/负数拦截、模板复制、计时与 CSV 公式转义；本地浏览器流程覆盖创建、编辑、保存、模板、洞察、打卡切换、页面重载恢复和结束行程。APK 经 Android 官方 aapt2 / D8 构建、zipalign 对齐和 apksigner v2/v3 验签。
+已通过核心计算测试，以及 320/360/390/480 宽度下七个页面的检查。流程测试覆盖新建、分段、等待、保存、模板、计时卡、切换类型、页面重载恢复、接续、结束、超过 6 小时的处理、进行中编辑、标签管理及旧记录未知字段保留。测试夹具仅位于 `tests/fixtures/`。
 
-尚未连接安卓真机完成安装及覆盖安装测试。请按 `docs/RELEASE-CHECKLIST.md` 在目标手机验证原生文件选择器、后台恢复和覆盖升级。PRD 的 P2（OCR、年度报告、同行分摊）不在本版；标签支持自由编辑，尚未提供独立标签合并管理；超过 6 小时提供继续/手动编辑，未加入预计时间快捷结束。
+APK 经 aapt2 / D8 构建、zipalign 对齐、apksigner v2/v3 验签，并核对新旧 APK 证书一致。**尚未连接安卓真机验证安装、系统文件选择器及覆盖升级。** 真机步骤见 [发布检查单](docs/RELEASE-CHECKLIST.md)。
 
-## 数据与开发约束
+## 存储约束
 
-- 禁止使用删表重建迁移，禁止自动降级，禁止启动时写入示例数据覆盖用户记录。
-- 备份按 ID 合并，保留备份中不存在的本机记录；同 ID 使用导入版本，旧记录写入修订表。
-- 金额聚合先转整数分，避免浮点累加误差。
-- 统计只计入已完成行程；有缺失里程时不虚构效率指标。未记录的时间空隙单列为未分配。
-- 时间戳保存时区信息，展示按当前设备本地时区；暂不提供独立时区选择器。
-- 数据仍含个人位置与时间，请将 JSON/CSV 备份当作个人文件保管。
-
-产品参考资料见 `docs/PRD.md` 和 `docs/ui-design.html`。
+- 永久保留现有包名、签名和数据库文件名。结构变更使用增量迁移，不允许删表重建或自动降级。
+- JSON 备份按 ID 合并，保留其他本机记录；原记录写入修订表，导入失败整批回滚。
+- 金额按整数分聚合；等待与通行独立统计；没有里程时显示缺失指标，时间空隙不伪装成通行。
+- 记录包含时间戳及录入时区偏移，展示按设备本地时间。
+- 本地 WebView 只加载 APK 内资源，应用没有网络和定位权限。备份包含出行地点与时间，请妥善保管。

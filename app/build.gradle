@@ -6,8 +6,8 @@ android {
         applicationId 'com.frozamina.triplog'
         minSdk 26
         targetSdk 35
-        versionCode (project.findProperty('versionCode') ?: '1').toInteger()
-        versionName project.findProperty('versionName') ?: '1.0.0'
+        versionCode (project.findProperty('versionCode') ?: '2').toInteger()
+        versionName project.findProperty('versionName') ?: '1.1.0'
         testInstrumentationRunner 'android.test.InstrumentationTestRunner'
     }
     signingConfigs {

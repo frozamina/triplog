@@ -1,0 +1,93 @@
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(fonts/fraunces-1.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/fraunces-2.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(fonts/fraunces-3.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(fonts/fraunces-4.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/fraunces-5.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Noto Sans SC';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(fonts/sans-1.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Noto Sans SC';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(fonts/sans-2.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Noto Sans SC';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(fonts/sans-3.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Noto Sans SC';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(fonts/sans-4.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Noto Sans SC';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/sans-5.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Noto Serif SC';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(fonts/serif-1.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Noto Serif SC';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(fonts/serif-2.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Noto Serif SC';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(fonts/serif-3.woff2) format('woff2');
+}

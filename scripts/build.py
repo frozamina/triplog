@@ -14,7 +14,7 @@ def run(*args):
  if r.returncode:sys.exit(r.returncode)
 src=root/'app'/'src'/'main';gen=build/'gen';gen.mkdir(exist_ok=True)
 run(tool('aapt2'),'compile','--dir',src/'res','-o',build/'resources.zip')
-manifest=src/'AndroidManifest.xml';text=manifest.read_text(encoding='utf-8').replace('<manifest ', '<manifest package="com.frozamina.triplog" android:versionCode="'+os.getenv('TRIPLOG_VERSION_CODE','1')+'" android:versionName="'+os.getenv('TRIPLOG_VERSION_NAME','1.0.0')+'" ')
+manifest=src/'AndroidManifest.xml';text=manifest.read_text(encoding='utf-8').replace('<manifest ', '<manifest package="com.frozamina.triplog" android:versionCode="'+os.getenv('TRIPLOG_VERSION_CODE','2')+'" android:versionName="'+os.getenv('TRIPLOG_VERSION_NAME','1.1.0')+'" ')
 text=text.replace('<application ', '<uses-sdk android:minSdkVersion="26" android:targetSdkVersion="35"/><application ')
 (build/'AndroidManifest.xml').write_text(text,encoding='utf-8')
 run(tool('aapt2'),'link','-o',build/'unsigned.apk','--manifest',build/'AndroidManifest.xml','-I',android,'--java',gen,'-A',src/'assets',build/'resources.zip')
@@ -24,10 +24,15 @@ javac=jdk/'bin'/('javac.exe' if os.name=='nt' else 'javac')
 run(javac,'-encoding','UTF-8','-source','8','-target','8','-bootclasspath',str(android)+os.pathsep+str(bt/'core-lambda-stubs.jar'),'-d',classes,*sources)
 dex=build/'dex';dex.mkdir(exist_ok=True)
 run(java,'-cp',bt/'lib'/'d8.jar','com.android.tools.r8.D8','--release','--min-api','26','--lib',android,'--output',dex,*classes.rglob('*.class'))
-with zipfile.ZipFile(build/'unsigned.apk','a',zipfile.ZIP_DEFLATED) as z:
- for p in dex.glob('*.dex'):z.write(p,p.name)
+# Repack entries rather than appending: keep ZIP local and central header flags
+# consistent for Android's asset loader, preserving stored resources.arsc.
+with zipfile.ZipFile(build/'unsigned.apk','r') as source, zipfile.ZipFile(build/'repacked.apk','w') as target:
+ for entry in source.infolist():
+  if not entry.filename.endswith('.dex'):target.writestr(entry.filename,source.read(entry.filename),compress_type=entry.compress_type)
+ for p in dex.glob('*.dex'):target.write(p,p.name,compress_type=zipfile.ZIP_DEFLATED)
+os.replace(build/'repacked.apk',build/'unsigned.apk')
 run(tool('zipalign'),'-f','-P','16','4',build/'unsigned.apk',build/'aligned.apk')
-out=root.parent/('TripLog-'+os.getenv('TRIPLOG_VERSION_NAME','1.0.0')+'.apk')
+out=root.parent/('TripLog-'+os.getenv('TRIPLOG_VERSION_NAME','1.1.0')+'.apk')
 run(java,'-jar',bt/'lib'/'apksigner.jar','sign','--ks',os.environ['TRIPLOG_KEYSTORE'],'--ks-key-alias','triplog','--ks-pass','env:TRIPLOG_STORE_PASSWORD','--key-pass','env:TRIPLOG_KEY_PASSWORD','--out',out,build/'aligned.apk')
 run(java,'-jar',bt/'lib'/'apksigner.jar','verify','--verbose','--print-certs',out)
 print('APK:',out)

@@ -43,6 +43,8 @@ public class MainActivity extends Activity {
     }catch(Exception e){message("操作失败："+e.getMessage());}}
     private void message(String s){new AlertDialog.Builder(this).setMessage(s).setPositiveButton("确定",null).show();}
     @Override public void onBackPressed(){web.evaluateJavascript("window.appBack()",null);}
+    @Override protected void onPause(){super.onPause();if(web!=null)web.onPause();}
+    @Override protected void onResume(){super.onResume();if(web!=null)web.onResume();}
     @Override protected void onDestroy(){web.destroy();store.close();super.onDestroy();}
 }
 

@@ -11,3 +11,5 @@ t.status='done';assert.throws(()=>C.validate(t),/补全/);
 t=trip();t.origin='=HYPERLINK("bad")';let csv=C.csv([t]);assert(csv.startsWith('\uFEFF'));assert(csv.includes("'=HYPERLINK"));assert(csv.includes('等待'));
 t=trip();t.legs[0].distance_km=0;t.legs[1].distance_km=0;assert.equal(C.metrics(t).perKm,0);assert.equal(C.metrics(t).speed,0);
 console.log('PASS: overnight, independent waits, integer cents, overlap, negative values, template dates, durable timer, incomplete records, CSV formula escaping, zero distance');
+let estimate={id:'estimate',origin:'湛江',destination:'深圳',date:'2026-10-24',status:'done',legs:[],transfers:[],depart_at:'2026-10-24T23:00:00+08:00',arrive_at:'2026-10-25T02:00:00+08:00'};
+let estimateCopy=C.copyTrip(estimate,'2027-02-01');assert.equal(C.local(estimateCopy.depart_at).slice(0,10),'2027-02-01');assert.equal(C.metrics(estimateCopy).total,180);
