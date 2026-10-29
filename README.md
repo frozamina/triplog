@@ -1,8 +1,18 @@
-# 途迹 TripLog 1.1.2
+# 途迹 TripLog 1.1.3
 
 按 [PRD](docs/PRD.md) 与 [UI 设计稿](docs/ui-design.html) 重做的离线 Android 出行手账。
 
-[下载新版 APK](https://github.com/frozamina/triplog/raw/refs/heads/main/releases/TripLog-1.1.2.apk)
+[下载新版 APK](https://github.com/frozamina/triplog/raw/refs/heads/main/releases/TripLog-1.1.3.apk)
+
+## 1.1.3 行程衔接与分段编辑
+
+- 换乘次数按相邻通行段的衔接计算，高铁到地铁、地铁到高铁以及其他分段衔接均计入；每处衔接只计一次，不因多条等待记录重复累加。等待时长仍独立汇总。
+- 首页行程右侧显示整趟里程；详情概览新增总里程，通行段右侧显示本段里程。未填写时显示缺失提示，不虚构距离。
+- 编辑页支持长按通行段或等待段弹出“删除本段”，删除在保存整趟行程后生效。输入框仍可正常编辑，拖动把手保留排序。
+- 编辑卡片直接展示备注里选中的标签。
+- 本段补充信息按“交通方式 → 里程 km → 标签”排序，移除座位输入框；旧记录中的座位数据不被清除。备注及等待面板不再提供上移、下移按钮。
+
+![分段标签和里程](docs/screenshots/editor-segment-tags.png)
 
 ## 1.1.2 标签选择
 
@@ -38,8 +48,8 @@ Android 使用系统状态栏和系统导航，不绘制设计展示用的 iPhon
 
 - 按月分组的行程列表、搜索、进行中置顶和超过 24 小时待补全提示。
 - 城市、地点详情、日期、标题、备注、标签；草稿、完成、复制与删除。
-- 独立的通行段和换乘等待；时间接续、自动补齐相邻通行段之间的等待、跨天和重叠校验、拖动与上下排序。
-- 11 种交通方式，班次、座位、起终点详情、里程、花费明细、备注及标签。
+- 独立的通行段和换乘等待；时间接续、自动补齐相邻通行段之间的等待、跨天和重叠校验、拖动排序。
+- 11 种交通方式，班次、起终点详情、里程、花费明细、备注及标签。
 - 实时打卡计时卡、六个常用类型选项和更多方式、类型切换不重置开始时间、结束后立即开始下一段、预计到达。
 - 超过 6 小时可按预计时间结束、继续计时或手动改时间，绝不自动结束。打卡结束提示待补花费。
 - 时间轴、通行/等待构成、费用与里程指标；月度统计、方式效率、标签频次与条件洞察。
@@ -50,7 +60,7 @@ PRD 中列为远期的 P2（OCR、年度报告、同行分摊）不属于本版�
 
 ## 覆盖升级与数据
 
-本版 `versionCode=4`、`versionName=1.1.2`，与 1.0.0 / 1.1.0 / 1.1.1 使用同一永久签名和包名 `com.frozamina.triplog`。数据库继续为 `triplog.db`，schema 2，`Store.java` 与上版相同，无删表、重建或初始化示例数据。
+本版 `versionCode=5`、`versionName=1.1.3`，与 1.0.0 / 1.1.0 / 1.1.1 / 1.1.2 使用同一永久签名和包名 `com.frozamina.triplog`。数据库继续为 `triplog.db`，schema 2，`Store.java` 与上版相同，无删表、重建或初始化示例数据。
 
 **直接安装新版 APK，选择更新。不要先卸载，也不要清除应用数据。** 建议升级前从“我的”导出 JSON 备份。手机损坏、重置、卸载、清数据或签名密钥丢失，不能通过 APK 更新机制兜底。
 
@@ -69,8 +79,8 @@ export ANDROID_HOME=/path/to/android-sdk
 export TRIPLOG_KEYSTORE=/secure/path/triplog-release.jks
 export TRIPLOG_STORE_PASSWORD='your-store-password'
 export TRIPLOG_KEY_PASSWORD='your-key-password'
-export TRIPLOG_VERSION_CODE=5
-export TRIPLOG_VERSION_NAME=1.1.3
+export TRIPLOG_VERSION_CODE=6
+export TRIPLOG_VERSION_NAME=1.1.4
 python scripts/build.py
 ```
 
@@ -88,6 +98,7 @@ npx playwright install chromium
 node tests/ui.test.cjs
 node tests/editor-gestures.test.cjs
 node tests/tags.test.cjs
+node tests/segments.test.cjs
 ```
 
 已通过核心计算测试，以及 320/360/390/480 宽度下七个页面的检查。流程测试覆盖新建、分段、等待、保存、模板、计时卡、切换类型、页面重载恢复、接续、结束、超过 6 小时的处理、进行中编辑、标签管理及旧记录未知字段保留。测试夹具仅位于 `tests/fixtures/`。

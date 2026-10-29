@@ -28,10 +28,9 @@ const root=path.resolve(__dirname,'..'),url='file:///'+path.join(root,'app/src/m
   assert.equal(await page.locator('.notice').filter({hasText:'段没填花费'}).count(),0);
   await page.evaluate(()=>edit());await page.getByRole('button',{name:'编辑换乘等待',exact:true}).count();
   await page.locator('[data-action="waitEdit"]').first().click();
-  for(const label of ['↑ 上移','↓ 下移','删除']){const b=page.getByRole('dialog').getByRole('button',{name:label,exact:true});const box=await b.boundingBox();assert(box.width>=80&&box.height>=48)}
+  for(const label of ['删除']){const b=page.getByRole('dialog').getByRole('button',{name:label,exact:true});const box=await b.boundingBox();assert(box.width>=80&&box.height>=48)}
   await page.screenshot({path:path.join(out,'segment-actions.png')});
-  const waitId=await page.evaluate(()=>modal.id),before=await page.evaluate(id=>draft.transfers.find(s=>s.id===id).seq,waitId);
-  await page.getByRole('button',{name:'↓ 下移',exact:true}).click();assert.equal(await page.evaluate(id=>draft.transfers.find(s=>s.id===id).seq,waitId),before+1);
+  assert.equal(await page.getByRole('button',{name:'↑ 上移',exact:true}).count(),0);assert.equal(await page.getByRole('button',{name:'↓ 下移',exact:true}).count(),0);
   await page.evaluate(()=>{screen='home';modal=null;render()});
   // A short click still opens the trip. A hold opens actions without navigation.
   const homeCard=()=>page.locator('.trip[data-value="design-detail"]');

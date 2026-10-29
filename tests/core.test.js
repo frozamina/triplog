@@ -13,3 +13,11 @@ t=trip();t.legs[0].distance_km=0;t.legs[1].distance_km=0;assert.equal(C.metrics(
 console.log('PASS: overnight, independent waits, integer cents, overlap, negative values, template dates, durable timer, incomplete records, CSV formula escaping, zero distance');
 let estimate={id:'estimate',origin:'湛江',destination:'深圳',date:'2026-10-24',status:'done',legs:[],transfers:[],depart_at:'2026-10-24T23:00:00+08:00',arrive_at:'2026-10-25T02:00:00+08:00'};
 let estimateCopy=C.copyTrip(estimate,'2027-02-01');assert.equal(C.local(estimateCopy.depart_at).slice(0,10),'2027-02-01');assert.equal(C.metrics(estimateCopy).total,180);
+t=trip();t.transfers=[];assert.equal(C.metrics(t).transfers,1,'highspeed to metro without a waiting record');
+t.legs[0].mode='metro';t.legs[1].mode='highspeed';assert.equal(C.metrics(t).transfers,1,'metro to highspeed');
+t=trip();t.transfers.push({...t.transfers[0],id:'another-wait',seq:1.5});assert.equal(C.metrics(t).transfers,1,'multiple waits do not double-count the same handoff');
+t=trip();t.legs.push({...t.legs[1],id:'walk',seq:3,mode:'walk'});assert.equal(C.metrics(t).transfers,2);
+t=trip();t.legs=t.legs.slice(0,1);assert.equal(C.metrics(t).transfers,0,'waiting after the last leg is not another vehicle handoff');
+t=trip();t.distance_km=0;assert.equal(C.metrics(t).distance,0);assert.equal(C.metrics(t).distanceKnown,true);
+t=trip();t.legs.forEach(s=>s.distance_km=null);assert.equal(C.metrics(t).distanceKnown,false);
+console.log('PASS: adjacent-leg transfer counts, deduplicated waits, zero and missing mileage.');

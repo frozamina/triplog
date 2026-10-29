@@ -41,3 +41,11 @@ html,body,#app{height:100%;width:100%;overflow:hidden;min-height:0}body{backgrou
 .tag-custom-row{display:flex;align-items:center;gap:8px;margin-top:12px}.tag-custom-row>input{min-width:0;flex:1}.tag-custom-row>button{flex-shrink:0;min-height:44px;padding:9px 14px;border-radius:9px;background:var(--forest-soft);color:var(--forest);font-size:12px}
 .detail-tags>button{font-size:10.5px;padding:4px 10px;min-height:30px;border-radius:999px;background:var(--forest-soft);color:var(--forest);letter-spacing:.02em}.detail-tags>button.ghost{background:var(--surface-2);color:var(--ink-3)}
 .segment-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}.segment-tags>span{font-size:9.5px;background:var(--forest-soft);color:var(--forest);padding:3px 7px;border-radius:999px}
+
+.trip-meta .trip-distance{font-family:var(--font-num);font-size:10px;color:var(--ink-3);white-space:nowrap}
+.metrics-four{grid-template-columns:repeat(4,minmax(0,1fr))}.metrics-four b{font-size:17px;max-width:100%;overflow-wrap:anywhere}.metrics-four span{font-size:9px}
+.leg-readings{margin-left:auto;display:grid;grid-template-columns:auto auto;gap:4px 8px;flex-shrink:0;align-items:center}.lhead .leg-readings .dur{margin-left:0;font-size:12px}.leg-readings .price{min-width:30px}.leg-readings .leg-distance{grid-column:1/-1;text-align:right;font-size:10px;font-weight:400;color:var(--ink-3);font-family:var(--font-num)}
+.editor-segment-meta{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-top:8px}.editor-segment-meta .segment-tags{margin-top:0;min-width:0}.editor-leg-distance{margin-left:auto;white-space:nowrap;font-family:var(--font-num);font-size:10px;color:var(--ink-3);line-height:20px}.tcard-copy{display:flex;flex-direction:column;gap:2px;min-width:0}.tcard-copy .segment-tags{margin-top:3px}
+.sort-controls{display:flex;justify-content:flex-end}.sort-controls button{width:100%;min-height:48px}
+.legcard,.tcard{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}.legcard input,.legcard textarea{-webkit-user-select:text;user-select:text;-webkit-touch-callout:default}
+@media(max-width:360px){.metrics-four b{font-size:15px}.metrics-four span{font-size:8.5px}.leg-readings{gap:3px 5px}.lhead .leg-readings .dur,.leg-readings .price{font-size:11px}.trip-meta .trip-distance{font-size:9px}}

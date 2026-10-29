@@ -13,7 +13,7 @@ const root=path.resolve(__dirname,'..'),url='file:///'+path.join(root,'app/src/m
   await page.getByRole('button',{name:'关闭',exact:true}).click();
   await page.getByRole('button',{name:'行程',exact:true}).click();await page.locator('.trip[data-value="design-detail"]').click();
   await page.getByRole('button',{name:'编辑高铁',exact:true}).click();
-  assert.equal(await page.locator('#extra-mode').evaluate(el=>el.nextElementSibling.dataset.tagField),'extra-tags');
+  assert.equal(await page.locator('#extra-mode').evaluate(el=>el.nextElementSibling.htmlFor),'extra-distance_km');assert.equal(await page.locator('#extra-distance_km').evaluate(el=>el.nextElementSibling.dataset.tagField),'extra-tags');
   const mode=await page.locator('#extra-mode').boundingBox(),tagField=await page.locator('[data-tag-field="extra-tags"]').boundingBox(),carrier=await page.locator('#extra-carrier').boundingBox();
   assert(tagField.y>=mode.y+mode.height&&tagField.y<carrier.y);
   await page.locator('#extra-carrier').fill('G88');

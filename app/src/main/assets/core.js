@@ -7,12 +7,15 @@ const timeline=t=>[...(t.legs||[]).map(s=>({...s,kind:'leg'})),...(t.transfers||
 const start=s=>s.kind==='transfer'?s.start_at:s.depart_at;
 const end=s=>s.kind==='transfer'?s.end_at:s.arrive_at;
 const minutes=(a,b)=>a&&b?Math.max(0,(Date.parse(b)-Date.parse(a))/60000):0;
+// A handoff is counted once per pair of consecutive travel legs. Waiting is time, not an extra handoff.
+function transferCount(t){return Math.max(0,(t.legs||[]).length-1)}
+const hasDistance=v=>v!==null&&v!==undefined&&v!==''&&Number.isFinite(Number(v))&&Number(v)>=0;
 function metrics(t,now){
  const list=timeline(t), n=now||new Date().toISOString();let travel=0,wait=0,cents=0,km=0;
  list.forEach(s=>{let d=minutes(start(s),end(s)||(t.status==='ongoing'?n:null));if(s.kind==='transfer')wait+=d;else{travel+=d;cents+=Math.round(Number(s.cost||0)*100);km+=Number(s.distance_km||0)}});
  const total=list.length?minutes(start(list[0]),end(list[list.length-1])||(t.status==='ongoing'?n:null)):minutes(t.depart_at,t.arrive_at);
- const distance=Number(t.distance_km)||km;
- return{travel,wait,cost:cents/100,distance,total,transfers:t.transfers.length,ratio:total?wait/total:0,speed:total?distance/(total/60):0,perKm:distance?cents/100/distance:0,gap:Math.max(0,total-travel-wait)};
+ const distance=hasDistance(t.distance_km)?Number(t.distance_km):km,distanceKnown=hasDistance(t.distance_km)||(t.legs||[]).some(s=>hasDistance(s.distance_km));
+ return{travel,wait,cost:cents/100,distance,distanceKnown,total,transfers:transferCount(t),ratio:total?wait/total:0,speed:total?distance/(total/60):0,perKm:distance?cents/100/distance:0,gap:Math.max(0,total-travel-wait)};
 }
 function validate(t){
  if(!t.origin.trim()||!t.destination.trim()||!t.date)throw Error('请填写出发地、目的地和日期');
@@ -29,5 +32,5 @@ function copyTrip(t,date){const c=JSON.parse(JSON.stringify(t)),list=timeline(c)
 const local=v=>{if(!v)return '';let d=new Date(v);return new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,16)};
 const duration=v=>{let n=Math.round(v);return n>=60?Math.floor(n/60)+'h '+n%60+'m':n+'m'};
 function csv(trips){const q=s=>'"'+String(s??'').replace(/^[=+@\-\t\r]/,"'$&").replace(/"/g,'""')+'"';let rows=[['出发日期','出发地','目的地','类型','方式或活动','开始','结束','花费','里程','备注']];trips.forEach(t=>timeline(t).forEach(s=>rows.push([t.date,t.origin,t.destination,s.kind==='leg'?'通行':'等待',s.kind==='leg'?modes[s.mode]:s.activity,start(s),end(s),s.cost||0,s.distance_km||0,s.note||''])));return '\uFEFF'+rows.map(r=>r.map(q).join(',')).join('\r\n');}
-const api={modes,colors,uid,timeline,start,end,minutes,metrics,validate,copyTrip,local,duration,csv};if(typeof module!=='undefined')module.exports=api;else root.Core=api;
+const api={modes,colors,uid,timeline,start,end,minutes,metrics,transferCount,hasDistance,validate,copyTrip,local,duration,csv};if(typeof module!=='undefined')module.exports=api;else root.Core=api;
 })(typeof window!=='undefined'?window:globalThis);
