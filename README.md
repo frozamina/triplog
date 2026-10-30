@@ -100,8 +100,8 @@ export ANDROID_HOME=/path/to/android-sdk
 export TRIPLOG_KEYSTORE=/secure/path/triplog-release.jks
 export TRIPLOG_STORE_PASSWORD='your-store-password'
 export TRIPLOG_KEY_PASSWORD='your-key-password'
-export TRIPLOG_VERSION_CODE=6
-export TRIPLOG_VERSION_NAME=1.1.4
+export TRIPLOG_VERSION_CODE=9
+export TRIPLOG_VERSION_NAME=1.1.7
 python scripts/build.py
 ```
 
