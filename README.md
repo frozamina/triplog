@@ -1,8 +1,15 @@
-# 途迹 TripLog 1.1.7
+# 途迹 TripLog 1.1.8
 
 按 [PRD](docs/PRD.md) 与 [UI 设计稿](docs/ui-design.html) 重做的离线 Android 出行手账。
 
-[下载新版 APK](https://github.com/frozamina/triplog/raw/refs/heads/main/releases/TripLog-1.1.7.apk)
+[下载新版 APK](https://github.com/frozamina/triplog/raw/refs/heads/main/releases/TripLog-1.1.8.apk)
+
+## 1.1.8 实时编辑与时间衔接
+
+- 实时记录里点击通行段可编辑本段起点、终点、花费和里程；地铁段编辑站数。起点与整趟起点可不同。
+- 本段补充信息移除普通里程输入。
+- 实时记录中的分段编辑保存、关闭或点空白后仍留在实时记录页；新建行程的补充面板关闭后仍留在编辑页。
+- 编辑段落的开始或结束时间时，按该段已有时长联动另一端，并将后续行程段与换乘紧密接续；前段结束时间变化会顺延后续各段。
 
 ## 1.1.7 日期与时长优化
 
@@ -81,7 +88,7 @@ PRD 中列为远期的 P2（OCR、年度报告、同行分摊）不属于本版�
 
 ## 覆盖升级与数据
 
-本版 `versionCode=9`、`versionName=1.1.7`，与 1.0.0 / 1.1.0 / 1.1.1 / 1.1.2 / 1.1.3 使用同一永久签名和包名 `com.frozamina.triplog`。数据库继续为 `triplog.db`，schema 2，`Store.java` 与上版相同，无删表、重建或初始化示例数据。
+本版 `versionCode=10`、`versionName=1.1.8`，与 1.0.0 / 1.1.0 / 1.1.1 / 1.1.2 / 1.1.3 使用同一永久签名和包名 `com.frozamina.triplog`。数据库继续为 `triplog.db`，schema 2，`Store.java` 与上版相同，无删表、重建或初始化示例数据。
 
 **直接安装新版 APK，选择更新。不要先卸载，也不要清除应用数据。** 建议升级前从“我的”导出 JSON 备份。手机损坏、重置、卸载、清数据或签名密钥丢失，不能通过 APK 更新机制兜底。
 
@@ -100,8 +107,8 @@ export ANDROID_HOME=/path/to/android-sdk
 export TRIPLOG_KEYSTORE=/secure/path/triplog-release.jks
 export TRIPLOG_STORE_PASSWORD='your-store-password'
 export TRIPLOG_KEY_PASSWORD='your-key-password'
-export TRIPLOG_VERSION_CODE=9
-export TRIPLOG_VERSION_NAME=1.1.7
+export TRIPLOG_VERSION_CODE=10
+export TRIPLOG_VERSION_NAME=1.1.8
 python scripts/build.py
 ```
 
