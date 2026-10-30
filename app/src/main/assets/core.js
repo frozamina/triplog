@@ -1,7 +1,7 @@
 (function(root){
 'use strict';
-const modes={walk:'步行',taxi:'打车',bus:'公交',metro:'地铁',train:'动车',highspeed:'高铁',coach:'大巴',drive:'驾车',flight:'飞机',ferry:'轮渡',bike:'骑行'};
-const colors={walk:'#8B8F94',taxi:'#767B82',bus:'#8E7A4A',metro:'#3F7D6B',train:'#2C5C8F',highspeed:'#2C5C8F',coach:'#A8763C',drive:'#6A5A8C',flight:'#56859B',ferry:'#367D93',bike:'#6A8B52',wait:'#C4542F'};
+const modes={walk:'步行',taxi:'打车',bus:'公交',metro:'地铁',train:'动车',highspeed:'高铁',coach:'大巴',drive:'驾车',flight:'飞机',ferry:'轮渡',bike:'自行车',ebike:'电动车'};
+const colors={walk:'#8B8F94',taxi:'#767B82',bus:'#8E7A4A',metro:'#3F7D6B',train:'#2C5C8F',highspeed:'#2C5C8F',coach:'#A8763C',drive:'#6A5A8C',flight:'#56859B',ferry:'#367D93',bike:'#6A8B52',ebike:'#4D806B',wait:'#C4542F'};
 const uid=()=> 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,c=>{const r=Math.floor(Math.random()*16);return(c==='x'?r:(r&3|8)).toString(16)});
 const timeline=t=>[...(t.legs||[]).map(s=>({...s,kind:'leg'})),...(t.transfers||[]).map(s=>({...s,kind:'transfer'}))].sort((a,b)=>a.seq-b.seq);
 const start=s=>s.kind==='transfer'?s.start_at:s.depart_at;
