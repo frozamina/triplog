@@ -49,6 +49,9 @@ html,body,#app{height:100%;width:100%;overflow:hidden;min-height:0}body{backgrou
 .sort-controls{display:flex;justify-content:flex-end}.sort-controls button{width:100%;min-height:48px}
 .legcard,.tcard{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}.legcard input,.legcard textarea{-webkit-user-select:text;user-select:text;-webkit-touch-callout:default}
 @media(max-width:360px){.metrics-four b{font-size:15px}.metrics-four span{font-size:8.5px}.leg-readings{gap:3px 5px}.lhead .leg-readings .dur,.leg-readings .price{font-size:11px}.trip-meta .trip-distance{font-size:9px}}
+/* Keep leg-note actions in the sheet header, with comfortable touch targets. */
+.sheet-header-actions{display:flex;align-items:center;gap:4px;flex-shrink:0}.sheet-header-actions .nav-btn{width:40px;height:44px}.sheet-inline-delete,.sheet-inline-save{min-width:48px;height:44px;padding:0 9px;border-radius:10px;text-align:center;font-size:11px;white-space:nowrap}.sheet-inline-delete{color:var(--clay);background:var(--clay-soft)}.sheet-inline-save{color:#fff;background:var(--forest);font-weight:500}.sheet-header h3{white-space:nowrap}
+@media(max-width:360px){.sheet-header{gap:6px}.sheet-header h3{font-size:17px}.sheet-header-actions{gap:3px}.sheet-header-actions .nav-btn{width:36px}.sheet-inline-delete,.sheet-inline-save{min-width:44px;padding:0 7px;font-size:10.5px}}
 /* Mileage now shares the visual weight of time and fare, using the app's teal accent. */
 .trip-meta .cost{font-size:14px}.trip-meta .trip-distance{font-family:var(--font-num);font-size:14px;font-weight:500;color:#3F7D6B;line-height:1.05}
 .metrics-four b{font-size:19px}.metrics-four span{font-size:10px}

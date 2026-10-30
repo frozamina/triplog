@@ -1,8 +1,13 @@
-# 途迹 TripLog 1.1.4
+# 途迹 TripLog 1.1.6
 
 按 [PRD](docs/PRD.md) 与 [UI 设计稿](docs/ui-design.html) 重做的离线 Android 出行手账。
 
-[下载新版 APK](https://github.com/frozamina/triplog/raw/refs/heads/main/releases/TripLog-1.1.4.apk)
+[下载新版 APK](https://github.com/frozamina/triplog/raw/refs/heads/main/releases/TripLog-1.1.6.apk)
+
+## 1.1.6 编辑交互优化
+
+- 编辑行程卡片的备注入口统一显示为“编辑”，当前交通方式移到选择栏最左侧。
+- 本段补充信息页把删除、保存按钮移到标题栏，与关闭按钮并列；按钮保留便于触控的尺寸。
 
 ## 1.1.4 里程与换乘规则
 
@@ -69,7 +74,7 @@ PRD 中列为远期的 P2（OCR、年度报告、同行分摊）不属于本版�
 
 ## 覆盖升级与数据
 
-本版 `versionCode=6`、`versionName=1.1.4`，与 1.0.0 / 1.1.0 / 1.1.1 / 1.1.2 / 1.1.3 使用同一永久签名和包名 `com.frozamina.triplog`。数据库继续为 `triplog.db`，schema 2，`Store.java` 与上版相同，无删表、重建或初始化示例数据。
+本版 `versionCode=8`、`versionName=1.1.6`，与 1.0.0 / 1.1.0 / 1.1.1 / 1.1.2 / 1.1.3 使用同一永久签名和包名 `com.frozamina.triplog`。数据库继续为 `triplog.db`，schema 2，`Store.java` 与上版相同，无删表、重建或初始化示例数据。
 
 **直接安装新版 APK，选择更新。不要先卸载，也不要清除应用数据。** 建议升级前从“我的”导出 JSON 备份。手机损坏、重置、卸载、清数据或签名密钥丢失，不能通过 APK 更新机制兜底。
 
