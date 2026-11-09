@@ -1,8 +1,13 @@
-# 途迹 TripLog 1.1.14
+# 途迹 TripLog 1.1.15
 
 按 [PRD](docs/PRD.md) 与 [UI 设计稿](docs/ui-design.html) 重做的离线 Android 出行手账。
 
-[下载新版 APK](https://github.com/frozamina/triplog/raw/refs/heads/main/releases/TripLog-1.1.14.apk)
+[下载新版 APK](https://github.com/frozamina/triplog/raw/refs/heads/main/releases/TripLog-1.1.15.apk)
+
+## 1.1.15 洞察与等待段修复
+
+- 洞察页“按月 / 按年 / 全部”的按钮文字水平、垂直居中。
+- 删除换乘等待并保存行程后不再自动重建；等待段只在用户主动添加或实时记录时生成。两段通行之间可保留未记录的时间空档。
 
 ## 1.1.14 编辑行程段里程
 
@@ -100,7 +105,7 @@ Android 使用系统状态栏和系统导航，不绘制设计展示用的 iPhon
 
 - 按月分组的行程列表、搜索、进行中置顶和超过 24 小时待补全提示。
 - 城市、地点详情、日期、标题、备注、标签；草稿、完成、复制与删除。
-- 独立的通行段和换乘等待；时间接续、自动补齐相邻通行段之间的等待、跨天和重叠校验、拖动排序。
+- 独立的通行段和换乘等待；新增段默认接续上一段时间、跨天和重叠校验、拖动排序，等待由用户主动记录。
 - 11 种交通方式，班次、起终点详情、里程、花费明细、备注及标签。
 - 实时打卡计时卡、六个常用类型选项和更多方式、类型切换不重置开始时间、结束后立即开始下一段、预计到达。
 - 超过 6 小时可按预计时间结束、继续计时或手动改时间，绝不自动结束。打卡结束提示待补花费。
@@ -112,7 +117,7 @@ PRD 中列为远期的 P2（OCR、年度报告、同行分摊）不属于本版�
 
 ## 覆盖升级与数据
 
-本版 `versionCode=16`、`versionName=1.1.14`，与 1.0.0 / 1.1.0 / 1.1.1 / 1.1.2 / 1.1.3 使用同一永久签名和包名 `com.frozamina.triplog`。数据库继续为 `triplog.db`，schema 2，`Store.java` 与上版相同，无删表、重建或初始化示例数据。
+本版 `versionCode=17`、`versionName=1.1.15`，与此前版本使用同一永久签名和包名 `com.frozamina.triplog`。数据库继续为 `triplog.db`，schema 2，`Store.java` 与上版相同，无删表、重建或初始化示例数据。
 
 **直接安装新版 APK，选择更新。不要先卸载，也不要清除应用数据。** 建议升级前从“我的”导出 JSON 备份。手机损坏、重置、卸载、清数据或签名密钥丢失，不能通过 APK 更新机制兜底。
 
@@ -131,8 +136,8 @@ export ANDROID_HOME=/path/to/android-sdk
 export TRIPLOG_KEYSTORE=/secure/path/triplog-release.jks
 export TRIPLOG_STORE_PASSWORD='your-store-password'
 export TRIPLOG_KEY_PASSWORD='your-key-password'
-export TRIPLOG_VERSION_CODE=10
-export TRIPLOG_VERSION_NAME=1.1.14
+export TRIPLOG_VERSION_CODE=17
+export TRIPLOG_VERSION_NAME=1.1.15
 python scripts/build.py
 ```
 
